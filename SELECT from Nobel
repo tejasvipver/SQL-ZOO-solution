@@ -24,5 +24,9 @@ s- SELECT yr, subject, winner FROM nobel  WHERE winner in  ('Theodore Roosevelt'
 s- SELECT winner FROM nobel WHERE winner LIKE 'John%';
 
 8. Show the year, subject, and name of physics winners for 1980 together with the chemistry winners for 1984.
+s- select * from nobel where (yr=1980 and subject='physics') or (yr=1984 and subject='chemistry');
+
+9. Show the year, subject, and name of winners for 1980 excluding chemistry and medicine
+s - select yr, subject, winner from nobel where yr = 1980 and subject not in ('chemistry' , 'medicine')
 
 
