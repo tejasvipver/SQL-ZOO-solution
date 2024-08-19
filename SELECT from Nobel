@@ -27,6 +27,20 @@ s- SELECT winner FROM nobel WHERE winner LIKE 'John%';
 s- select * from nobel where (yr=1980 and subject='physics') or (yr=1984 and subject='chemistry');
 
 9. Show the year, subject, and name of winners for 1980 excluding chemistry and medicine
-s - select yr, subject, winner from nobel where yr = 1980 and subject not in ('chemistry' , 'medicine')
+s - select yr, subject, winner from nobel where yr = 1980 and subject not in ('chemistry' , 'medicine');
+or  SELECT yr, subject, winner FROM nobel WHERE yr = 1980 AND subject != 'Chemistry' AND subject != 'Medicine'
 
+10. Show year, subject, and name of people who won a 'Medicine' prize in an early year (before 1910, not including 1910) together with winners of a 'Literature' prize in a later year (after 2004, including 2004)
+s - SELECT * FROM nobel WHERE (Subject = 'Medicine' AND YR < 1910) OR (Subject = 'Literature' AND YR >= 2004);
 
+11. Find all details of the prize won by PETER GRÜNBERG.
+s- SELECT * FROM nobel WHERE winner LIKE 'peter gr%nberg';
+
+12. Find all details of the prize won by EUGENE O'NEILL
+s- SELECT * FROM nobel WHERE winner LIKE 'EUGENE O_NEILL';
+
+13. List the winners, year and subject where the winner starts with Sir. Show the the most recent first, then by name order.
+s-  select winner, yr, subject from nobel where winner like 'Sir%' order by yr desc, winner asc;
+
+14. The expression subject IN ('chemistry','physics') can be used as a value - it will be 0 or 1. Show the 1984 winners and subject ordered by subject and winner name; but list chemistry and physics last.
+s - SELECT winner, subject FROM nobel WHERE yr=1984 ORDER BY case when subject IN ('physics','chemistry') then 1 else 0 end, subject,winner;
